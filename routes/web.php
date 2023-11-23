@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\SubCategoriasController;
 use App\Http\Controllers\UsuariosController;
 use App\Models\Contacto;
+use App\Http\Controllers\Detalles_compra_controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,4 +106,11 @@ Route::controller(ContactoController::class)->group(function () {
 Route::resource('admin/products', ProductosController::class);
 Route::controller(ProductosController::class)->group(function () {
     Route::get('admin/products', 'index')->name('admin.indexProductos');
+});
+
+
+Route::controller(Detalles_compra_controller::class)->group(function () {
+    Route::get('admin/listaCompras', 'index');
+    Route::post('admin/guardarCompras', 'store');
+   
 });

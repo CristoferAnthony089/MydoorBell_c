@@ -45,10 +45,8 @@ class ContactoController extends Controller
     public function show(Contacto $contacto)
     {
         $contactos = DB::table('contactanos')
-        ->select('*')
-        ->where('')
         ->get();
-        return view('admin.cotactanos', compact('contactos'));
+        return view('admin.contactanos', compact('contactos'));
     }
 
     /**

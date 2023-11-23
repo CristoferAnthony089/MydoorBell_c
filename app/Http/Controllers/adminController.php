@@ -24,7 +24,7 @@ class adminController extends Controller
 
 
     function users(){
-        $usuarios = DB::table('usuarios')
+        $usuarios = DB::table('users')
         ->select('*')
         ->where('rol_usu', '=', 'C')
         ->get();

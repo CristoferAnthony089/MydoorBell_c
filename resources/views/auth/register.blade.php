@@ -33,6 +33,27 @@
                                             <div class="text-danger">Falta nombre.</div>
                                             @enderror
                                         </div>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" name="apellidos_usu" id="form2Example11" class="form-control"
+                                                placeholder="Apellidos" />
+                                            <label class="form-label" for="form2Example11"></label>
+                                            @error('apellidos_usu')
+                                            <div class="text-danger">Falta apellidos.</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input type="text" name="telefono" id="form2Example11" class="form-control"
+                                                placeholder="Numero de celular" />
+                                            <label class="form-label" for="form2Example11"></label>
+                                            @error('telefono')
+                                            <div class="text-danger">Falta numero de celular.</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <input value="C" type="hidden" name="rol_usu" id="form2Example11" class="form-control"/>
+                                        </div>
 
                                         <div class="form-outline mb-4">
                                             <input type="email" name="email" id="form2Example11"
@@ -98,6 +119,15 @@
         crossorigin="anonymous"></script>
 </body>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <br>
 <br>
 <br>

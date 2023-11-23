@@ -13,7 +13,7 @@
                 <div class="bg-primary card  text-white mb-4">
                     <div class="card-body">Productos</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ url('admin/indexProductos')}}">Ver</a>
+                        <a class="small text-white stretched-link" href="{{ url('admin/products')}}">Ver</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -62,11 +62,22 @@
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Contactanos</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ url('admin/contactanos')}}">Ver</a>
+                        <a class="small text-white stretched-link" href="{{ url('admin/contact')}}">Ver</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-xl-3 col-md-6">
+                <div class="bg-primary card  text-white mb-4">
+                    <div class="card-body">Detalle de compras</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="{{ url('admin/listaCompras')}}">Ver</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            
 
             <!-- ... (otros bloques de tarjetas) ... -->
         </div>
