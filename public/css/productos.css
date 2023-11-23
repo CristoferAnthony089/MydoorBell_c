@@ -1,0 +1,149 @@
+.contener {
+    border-radius: 12px;
+}
+
+/*Formularios */
+
+.formularioAñadir form {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.formularioAñadir select {
+    width: 90%;
+    border: none;
+}
+
+.imagen {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin: 12px;
+    border: solid 1px;
+}
+
+.imagen input[type="file"] {
+    display: none;
+}
+
+.imagen img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.imagen label {
+    margin: auto;
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.imagen box-icon {
+    margin: 46px;
+}
+
+.datos label {
+    display: block;
+    text-align: left;
+}
+
+.datos input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 90%;
+}
+
+.datos textarea {
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    width: 90%;
+}
+
+.botones {
+    grid-area: span 2;
+    width: 100%;
+    display: flex;
+    padding: 2vh;
+    margin: auto;
+}
+
+.botones button {
+    margin: 12px;
+}
+
+/*Formulario Modificar*/
+.modificar {
+    display: none;
+    border: 1px solid #a1a1a1;
+    padding: 20px;
+    width: 400px;
+    border-radius: 12px;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modificar h3 {
+    padding: 12px;
+}
+
+.modificar form {
+    margin: auto;
+    border: 1px solid #ccc;
+    display: grid;
+    grid-template-columns: auto auto;
+    border-radius: 10px;
+    background-color: #eeeeee82;
+}
+
+.imagen {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    margin: 12px;
+    border: solid 1px;
+}
+
+.imagen input[type="file"] {
+    display: none;
+}
+
+.imagen img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.imagen label {
+    margin: auto;
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.imagen box-icon {
+    margin: 46px;
+}
+
+.datos label {
+    display: block;
+}
+
+.datos input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 90%;
+}
+
+.datos textarea {
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    width: 90%;
+}
