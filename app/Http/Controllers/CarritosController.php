@@ -45,25 +45,33 @@ class CarritosController extends Controller
             ->where('id_usu', $this->id_usu)
             ->first();
 
-        // Si existe, aumentar la cantidad
+        // Obtener el precio actual del producto
+        $producto = Productos::find($datos['id_pro']);
+        $precioProducto = $producto['precio_pro'];
+
+        // Calcular los nuevos valores
+        $datos['precio_pro'] = $precioProducto;
+        $datos['subtotal_car'] = $datos['cantidad_car'] * $precioProducto;
+        $datos['total_car'] = $datos['cantidad_car'] * $precioProducto;
+
+        // Si existe, actualizar la cantidad y los valores relacionados
         if ($carritoExistente) {
             Carritos::where('id_pro', $datos['id_pro'])
                 ->where('id_usu', $this->id_usu)
-                ->increment('cantidad_car', $datos['cantidad_car']);
+                ->increment('cantidad_car', $datos['cantidad_car'], [
+                    'subtotal_car' => DB::raw('subtotal_car + ' . $datos['subtotal_car']),
+                    'total_car' => DB::raw('total_car + ' . $datos['total_car']),
+                ]);
+
             $respuesta = ['mensaje' => 'Se actualizó el producto en su carrito'];
-            $respuesta = ['mensaje' => 'Cantidad actualizada en el carrito'];
         } else {
             // Si no existe, crear un nuevo registro
-            $producto = Productos::find($datos['id_pro']);
-            $datos['precio_pro'] =   $producto['precio_pro'];
-            $datos['subtotal_car'] = ($datos['cantidad_car'] * $producto['precio_pro']);
-            $datos['total_car'] = ($datos['cantidad_car'] * $producto['precio_pro']);
             Carritos::create($datos);
-            //return response()->json(['mensaje' => 'Producto agregado al carrito'], 200);
             $respuesta = ['mensaje' => 'Producto agregado al carrito'];
-            // Devolver la respuesta en formato JSON
-            echo json_encode($respuesta);
         }
+
+        // Devolver la respuesta en formato JSON
+        return response()->json($respuesta);
     }
     /**
      * Remove the specified resource from storage.
