@@ -47,6 +47,7 @@
                                                 <input class="cantidad w-50" name="cantidad_car" type="number"
                                                     value="{{ $carrito->total_cantidad_car }}" readonly>
                                                 <i class="iconos_carrito mas fas fa-plus"></i>
+                                                <input type="submit" value="Modificar" class="btn btn-primary">
                                             </form>
                                         </div>
                                     </label>

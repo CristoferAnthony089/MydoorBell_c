@@ -13,6 +13,7 @@ use App\Models\Contacto;
 use App\Http\Controllers\AdminCarritosController;
 use App\Http\Controllers\Detalles_compra_controller;
 use App\Http\Controllers\CarritosController;
+use App\Http\Controllers\CitaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,12 @@ Route::controller(clienteController::class)->group(function () {
     Route::get('client/profile', 'profile');
     Route::get('client/cite', 'cite');
 });
+
+Route::get('/citas', 'CitaController@index');
+Route::get('client/citas', [CitaController::class, 'index']);
+Route::delete('/citas/{id}', [CitaController::class, 'destroy'])->name('citas.destroy');
+Route::post('/citas', [CitaController::class, 'store']);
+
 
 Route::resource('client/shopping-cart', CarritosController::class);
 Route::controller(CarritosController::class)->group(function () {
