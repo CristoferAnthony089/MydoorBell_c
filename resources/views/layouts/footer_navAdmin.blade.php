@@ -28,7 +28,8 @@
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fas fa-user fa-fw"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -36,7 +37,8 @@
                         <a class="dropdown-item text-decoration-none">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Cerrar sesion') }}
                                 </x-dropdown-link>
@@ -66,6 +68,10 @@
                             <a class="nav-link" href="{{ url('admin/users') }}">
                                 <i class="fas fa-table"></i>
                                 Usuarios
+                            </a>
+                            <a class="nav-link" href="{{ route('Ashopping-cart.index') }}">
+                                <i class="fas fa-table"></i>
+                                Carritos
                             </a>
                             <a class="nav-link" href="{{ url('admin/software') }}">
                                 <i class="fas fa-table"></i>
@@ -102,14 +108,18 @@
             <main>
                 @yield('contenido')
             </main>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+                integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+            </script>
             <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
             <script src="{{ asset('js/scripts.js') }}"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
             <script src="assets/demo/chart-area-demo.js"></script>
             <script src="assets/demo/chart-bar-demo.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+                crossorigin="anonymous"></script>
             <script src="{{ asset('js/datatables-simple-demo.js') }}"></script>
         </div> <!-- Cierre de #layoutSidenav_content -->
     </div> <!-- Cierre de #layoutSidenav -->

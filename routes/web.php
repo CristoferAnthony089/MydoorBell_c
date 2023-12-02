@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\AdminCategoriasController;
 use App\Http\Controllers\AdminProductosController;
 use App\Models\Contacto;
+use App\Http\Controllers\AdminCarritosController;
 use App\Http\Controllers\Detalles_compra_controller;
 use App\Http\Controllers\CarritosController;
 
@@ -99,6 +100,7 @@ Route::controller(AdminSubCategoriasController::class)->group(function () {
 
 Route::delete('admin/contactanos/{contacto}', [AdminContactanosController::class, 'destroy'])->name('admin.contactanos.destroy');
 
+Route::resource('admin/Ashopping-cart', AdminCarritosController::class);
 
 Route::resource('client/contac', ContactoController::class);
 Route::controller(ContactoController::class)->group(function () {

@@ -9,71 +9,28 @@ class AdminCarritosController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        $carritos = DB::table('carritos as c')
+        $carritos = DB::table('carritos')
             ->select(
-                'c.id_usu',
-                'u.nombres_usu',
-                'u.apellidos_usu',
-                DB::raw('SUM(c.cantidad_car) as total_cantidad_car'),
-                DB::raw('CONCAT(u.nombres_usu, " ", u.apellidos_usu) as nombre'),
-                DB::raw('SUM(c.cantidad_car * p.precio_pro) as precioTotal')
+                'carritos.id_usu',
+                'users.name',
+                'users.apellidos_usu',
+                DB::raw('SUM(carritos.cantidad_car) as total_cantidad_car'),
+                DB::raw('CONCAT(users.name, " ", users.apellidos_usu) as nombre'),
+                DB::raw('SUM(carritos.cantidad_car * productos.precio_pro) as precioTotal')
             )
-            ->join('usuarios as u', 'u.id_usu', '=', 'c.id_usu')
-            ->join('productos as p', 'p.id_pro', '=', 'c.id_pro')
-            ->groupBy('c.id_usu', 'u.nombres_usu', 'u.apellidos_usu')
+            ->join('users', 'users.id', '=', 'carritos.id_usu')
+            ->join('productos', 'productos.id_pro', '=', 'carritos.id_pro')
+            ->groupBy('carritos.id_usu', 'users.name', 'users.apellidos_usu')
             ->get();
 
         return view('admin.carritos', compact('carritos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    // Resto del código...
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
