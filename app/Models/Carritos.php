@@ -9,6 +9,9 @@ class Carritos extends Model
 {
     protected $fillable = [
         'cantidad_car',
+        'precio_pro',
+        'subtotal_car',
+        'total_car',
         'id_usu',
         'id_pro'
     ];

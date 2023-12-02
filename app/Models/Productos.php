@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Categoria; 
+use App\Models\Categoria;
 use App\Models\Subcategorias;
 
 class Productos extends Model
 {
+    protected $primaryKey = 'id_pro';
+
     protected $fillable = [
         'id_pro',
         'imagen_pro',
@@ -28,8 +30,6 @@ class Productos extends Model
     {
         return $this->belongsTo(Subcategorias::class, 'id_subc');
     }
-    use HasFactory;
-    protected $primaryKey = 'id_pro';
 
     public $timestamps = false;
 

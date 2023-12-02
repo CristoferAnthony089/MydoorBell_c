@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Carritos;
+use App\Models\Productos;
 use Illuminate\Support\Facades\DB;
 
 class CarritosController extends Controller
@@ -39,7 +40,6 @@ class CarritosController extends Controller
     public function store(Request $request)
     {
         $datos = $request->except('_token');
-
         // Buscar el carrito existente con los mismos id_pro y id_usu
         $carritoExistente = Carritos::where('id_pro', $datos['id_pro'])
             ->where('id_usu', $this->id_usu)
@@ -51,19 +51,20 @@ class CarritosController extends Controller
                 ->where('id_usu', $this->id_usu)
                 ->increment('cantidad_car', $datos['cantidad_car']);
             $respuesta = ['mensaje' => 'Se actualizó el producto en su carrito'];
-            //$respuesta = ['mensaje' => 'Cantidad actualizada en el carrito'];
+            $respuesta = ['mensaje' => 'Cantidad actualizada en el carrito'];
         } else {
             // Si no existe, crear un nuevo registro
-            $datos['id_usu'] = $this->id_usu; // Added this line to set id_usu
+            $producto = Productos::find($datos['id_pro']);
+            $datos['precio_pro'] =   $producto['precio_pro'];
+            $datos['subtotal_car'] = ($datos['cantidad_car'] * $producto['precio_pro']);
+            $datos['total_car'] = ($datos['cantidad_car'] * $producto['precio_pro']);
             Carritos::create($datos);
             //return response()->json(['mensaje' => 'Producto agregado al carrito'], 200);
             $respuesta = ['mensaje' => 'Producto agregado al carrito'];
+            // Devolver la respuesta en formato JSON
+            echo json_encode($respuesta);
         }
-
-        // Devolver la respuesta en formato JSON
-        echo json_encode($respuesta);
     }
-
     /**
      * Remove the specified resource from storage.
      */

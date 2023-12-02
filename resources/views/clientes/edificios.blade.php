@@ -39,7 +39,7 @@
                                         </div>
                                     </label>
                                     <input type="hidden" name="id_pro" value="{{ $producto->id_pro }}">
-                                    <input type="hidden" name="id_usu" value="456">
+                                    <input type="hidden" name="id_usu" value="1">
                                     <input type="submit" id="agregar_{{ $producto->id_pro }}" class="d-none">
                                 </form>
                                 <form action="{{ url('client/details/' . $producto->id_pro) }}" method="get">

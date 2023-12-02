@@ -51,7 +51,7 @@
                 <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
             </ul>
         </nav>
-
+        @yield('cabezera')
     </header>
 
 
