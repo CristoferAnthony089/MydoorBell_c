@@ -71,17 +71,17 @@
                                 <i class="fas fa-table"></i>
                                 Software
                             </a>
-                            <a class="nav-link" href="{{ url('admin/indexCategorias') }}">
+                            <a class="nav-link" href="{{ route('category.index') }}">
                                 <i class="fas fa-table"></i>
                                 Categorias
                             </a>
-                            <a class="nav-link" href="{{ url('admin/indexSubCategorias') }}">
+                            <a class="nav-link" href="{{ route('subcategory.index') }}">
                                 <i class="fas fa-table"></i>
                                 Subcategorias
                             </a>
                             <a class="nav-link" href="{{ url('admin/contact') }}">
                                 <i class="fas fa-table"></i>
-                                Contactanos
+                                Comentarios
                             </a>
                             <a class="nav-link" href="{{ url('admin/listaCompras') }}">
                                 <i class="fas fa-table"></i>

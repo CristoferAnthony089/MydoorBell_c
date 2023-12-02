@@ -10,22 +10,20 @@
                 <div class="contactCon-form">
                     <form action="{{ url('client/contac') }}" method="POST">
                     @csrf
-                        <p>
-                            <label for="Nombre">Nombre</label>
-                            <input type="text" name="nombre" id="Nombre" required>
-                        </p>
-                        <p>
-                            <label for="Teléfono">Teléfono</label>
-                            <input type="text" name="telefono" id="Telefono">
-                        </p>
+
                         <p>
                             <label for="Correo">Correo eléctronico</label>
-                            <input type="email" name="correo" id="Correo" required>
+                            <input type="email" name="correo_con" id="Correo_con" required>
                         </p>
-
+                        <p>
+                            <select name="tipoasunto_con" id="tipoasunto_con">
+                                <option value="queja">Queja</option>
+                                <option value="sugerencia">Sugerencia</option>
+                            </select>
+                        </p>
                         <p class="blockCon">
-                            <label for="Comentario">Mensaje</label>
-                            <textarea name="descripcion" id="descripcion" cols="30" rows="3" required></textarea>
+                            <label for="Comentario">Descripcion</label>
+                            <textarea name="descripcion_con" id="descripcion_con" cols="30" rows="3" required></textarea>
                         </p class="blockCon">
                         <button type="submit">
                             Enviar

@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Subcategorias extends Model
 {
     public $timestamps = false;
-    protected $primaryKey = 'id_subcategoria';
-    protected $fillable = ['nombre_subc'];
+
+    protected $primaryKey = 'id_subc';
+
+    protected $fillable = [
+        'id_subc',
+        'nombre_subc'
+    ];
 }

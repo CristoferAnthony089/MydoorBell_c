@@ -1,42 +1,114 @@
 @extends('layouts.footer_nav')
 
+@section('estilos')
+    <link rel="stylesheet" href="{{ asset('css/productos.css') }}">
+@endsection
+
 @section('contenido')
-    <h1 class="text-center">Casas</h1>
-    <!-- Contenedores -->
-    <div class="container">
-        <div class="row">
-            @for ($i = 0; $i <= 5; $i++)
-                <div class="col-6 col-md-4 col-lg-3 m-auto mb-5">
-                    <div class="contenedorPro bg-body-secondary m-1 mb-4 h-100">
-                        <section class="m-auto">
-                            <div class="m-auto w-50">
-                                <img class="m-auto mt-2 w-100" src="{{ asset('img/camara.jpg') }}" alt="">
+    <h1 class="text-center mt-5">Casas</h1>
+    <input type="text" id="busqueda" class="form-control w-75 m-auto mt-3" placeholder="Buscar productos...">
+    <h3 class="text-center mt-3" id="sin_resultados"></h3>
+    <section class="contenedor">
+        @if ($productos->count() > 0)
+            @foreach ($productos as $producto)
+                <div class="contenedores">
+                    <section class="contenedor_productos_1">
+                        <figure>
+                            <img src="data:image/*;base64,{{ base64_encode($producto->imagen_pro) }}" alt="Imagen Producto">
+                        </figure>
+                    </section>
+                    <section class="contenedor_productos_2">
+                        <div>
+                            <h2 class="titulo_producto">
+                                {{ $producto->nombre_pro }}
+                            </h2>
+                            <p class="descripcion">
+                                {{ $producto->descripcion_pro }}
+                            </p>
+                            <strong class="precio">
+                                ${{ $producto->precio_pro }}
+                            </strong>
+                            <form class="agregarCarritoForm">
+                                @csrf
+                                <label class="mb-3">Cantidad
+                                    <div>
+                                        <i class="iconos_carrito menos fas fa-minus"></i>
+                                        <input class="cantidad" name="cantidad_car" type="number" value="1"
+                                            min="1" readonly>
+                                        <i class="iconos_carrito mas fas fa-plus"></i>
+                                    </div>
+                                </label>
+                                <input type="hidden" name="id_pro" value="{{ $producto->id_pro }}">
+                                <input type="hidden" name="id_usu" value="456">
+                                <input type="submit" id="agregar_{{ $producto->id_pro }}" class="d-none">
+                            </form>
+                            <form action="{{ url('client/details/' . $producto->id_pro) }}" method="get">
+                                {{-- Cambiado el enlace --}}
+                                @csrf
+                                <input type="submit" id="detalles_{{ $producto->id_pro }}" class="d-none">
+                            </form>
+                            <div>
+                                <button class="btn btn-secondary">
+                                    <label for="detalles_{{ $producto->id_pro }}" class="d-flex h-100 w-100">
+                                        <i class="fas fa-bars"></i>
+                                        <p>Detalles</p>
+                                    </label>
+                                </button>
+                                <button class="btn btn-primary">
+                                    <label for="agregar_{{ $producto->id_pro }}" class="d-flex">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        Agregar
+                                    </label>
+                                </button>
                             </div>
-                            <div class="w-75 m-auto mb-2 texto text-justify">
-                                <h5 class="text-center mt-2 mb-3">$510</h5>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere aspernatur debitis
-                                    obcaecati
-                                    libero
-                                </p>
-                            </div>
-                            <div class="formularioDetAgg m-auto">
-                                <form class="m-auto d-flex pb-3" action="">
-                                    <button type="button" class="d-block m-auto btn btn-primary">
-                                        <a class="text-decoration-none text-black"
-                                            href="{{ url('client/details') }}">Detalles
-                                            <i class="fas fa-bars"></i></a>
-                                    </button>
-                                    <button class="d-block m-auto btn btn-success">
-                                        <a class="text-decoration-none text-black" href="#">Agregar <i
-                                                class="fas fa-shopping-cart"></i></a>
-                                    </button>
-                                </form>
-                            </div>
-                        </section>
-                    </div>
+                        </div>
+                    </section>
                 </div>
-            @endfor
-        </div>
-    </div>
+            @endforeach
+    </section>
+@else
+    <h1 class="text-center mt-3">Sin Productos</h1>
+    @endif
+    <script src="{{ asset('js/carrito.js') }}"></script>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('submit', 'form.agregarCarritoForm', function(e) {
+                e.preventDefault();
+                var formData = $(this).serialize();
+                $.ajax({
+                    url: 'shopping-cart',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function(respuesta) {
+                        console.log(respuesta);
+                    },
+                });
+            });
+        });
+    </script>
+    <script>
+        // Script JavaScript para búsqueda en tiempo real
+        document.getElementById('busqueda').addEventListener('input', function() {
+            // Obtener el valor de búsqueda
+            var busqueda = this.value.toLowerCase();
+
+            // Filtrar y mostrar productos que coincidan con la búsqueda
+            var productos = document.querySelectorAll('.contenedores');
+            var mensaje = document.getElementById('sin_resultados');
+
+            productos.forEach(function(producto) {
+                var nombreProducto = producto.querySelector('.titulo_producto').textContent.toLowerCase();
+
+                if (nombreProducto.includes(busqueda)) {
+                    producto.style.display = 'block';
+                    mensaje.textContent = '';
+                } else {
+                    producto.style.display = 'none';
+                    mensaje.textContent = 'Sin Resultados';
+                }
+            });
+        });
+    </script>
 @endsection()

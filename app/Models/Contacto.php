@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Contacto extends Model
 {
     public $timestamps = false;
+    protected $table ='contactanos';
     protected $primaryKey='id_con';
     protected $fillable = [      
-     'nombre',
-     'telefono',
-     'correo',
-     'descripcion',
+     'correo_con',
+     'tipoasunto_con',
+     'descripcion_con',
     ];
 }

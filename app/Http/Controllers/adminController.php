@@ -14,13 +14,7 @@ class adminController extends Controller
 
    
 
-    function createProduct()
-{
-    $categorias = Categoria::all(); // Obtén todas las categorías
-    $subcategorias = Subcategorias::all(); // Obtén todas las subcategorías
 
-    return view('admin.crearProducto', compact('categorias', 'subcategorias'));
-}
 
 
     function users(){
@@ -31,7 +25,7 @@ class adminController extends Controller
         return view('admin.usuarios', compact('usuarios'));
     }
     function contacto(){
-        $contactos = DB::table('contactos')
+        $contactos = DB::table('contactanos')
         ->get();
         return view('admin.contactanos', compact('contactos'));
     }
@@ -47,6 +41,11 @@ class adminController extends Controller
 
     function crearCategoria(){
         return view('admin.crearCategoria');
+    }
+
+    public function indexx(){
+
+        return '/';
     }
 
 

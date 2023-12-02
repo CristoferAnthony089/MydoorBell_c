@@ -1,149 +1,144 @@
-.contener {
-    border-radius: 12px;
+/* Estilos para el contenedor principal */
+.categoria_producto_seccion{
+    padding-top: 10%;
 }
 
-/*Formularios */
-
-.formularioAñadir form {
-    display: grid;
-    grid-template-columns: auto auto;
-}
-
-.formularioAñadir select {
-    width: 90%;
-    border: none;
-}
-
-.imagen {
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    margin: 12px;
-    border: solid 1px;
-}
-
-.imagen input[type="file"] {
-    display: none;
-}
-
-.imagen img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-
-.imagen label {
-    margin: auto;
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-}
-
-.imagen box-icon {
-    margin: 46px;
-}
-
-.datos label {
+.link{
     display: block;
-    text-align: left;
+    margin-right: auto;
 }
 
-.datos input {
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 90%;
+.contenedor {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    width: 100vh;
 }
 
-.datos textarea {
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    width: 90%;
-}
-
-.botones {
-    grid-area: span 2;
+/* Estilos para los contenedores secundarios */
+.contenedores {
+    background-color: #fffcfc79;
     width: 100%;
+    height: 95%;
     display: flex;
-    padding: 2vh;
-    margin: auto;
-}
-
-.botones button {
-    margin: 12px;
-}
-
-/*Formulario Modificar*/
-.modificar {
-    display: none;
-    border: 1px solid #a1a1a1;
-    padding: 20px;
-    width: 400px;
+    flex-direction: column;
     border-radius: 12px;
-    background-color: white;
-    justify-content: center;
+    padding: 8%;
+    box-shadow: 1.5px 1px 15px rgba(0, 0, 0, 0.368);
+}
+
+.contenedor_productos_1{
     align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    justify-content: center;
 }
 
-.modificar h3 {
-    padding: 12px;
-}
-
-.modificar form {
-    margin: auto;
-    border: 1px solid #ccc;
-    display: grid;
-    grid-template-columns: auto auto;
-    border-radius: 10px;
-    background-color: #eeeeee82;
-}
-
-.imagen {
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    margin: 12px;
-    border: solid 1px;
-}
-
-.imagen input[type="file"] {
-    display: none;
-}
-
-.imagen img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-
-.imagen label {
-    margin: auto;
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-}
-
-.imagen box-icon {
-    margin: 46px;
-}
-
-.datos label {
+.contenedor_productos_1 img {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
     display: block;
+    margin: auto;
 }
 
-.datos input {
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 90%;
+.contenedor_productos_2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    text-align: center;
 }
 
-.datos textarea {
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    width: 90%;
+/* Estilos para el título del producto */
+.titulo_producto {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.descripcion {
+    font-size: .85rem;
+    text-align: justify;
+    overflow-x: auto;
+    height: 15vh;
+}
+
+.precio {
+    color: green;
+    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.contenedor_producto label {
+    margin: unset;
+}
+
+.contenedor_productos_2 input[type="number"] {
+    text-align: center;
+    width: 100px;
+    margin: auto;
+    background-color: transparent;
+    border: unset;
+}
+
+.contenedor_productos_2 button {
+    font-size: 90%;
+    width: 45%;
+    height: 5vh;
+    border-radius: 3px;
+}
+
+.iconos_carrito {
+    margin-right: 12px;
+    border-radius: 50%;
+    background-color: rgba(225, 225, 225, 0.737);
+    padding: 5px;
+}
+
+.iconos_carrito.fa-plus {
+    color: green;
+}
+
+.iconos_carrito.fa-minus {
+    color: red;
+}
+
+.botones label{
+    width: 100%;
+}
+
+/* Estilos para tamaños de pantalla pequeños, como teléfonos */
+@media (max-width: 768px) {
+    .contenedor {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
+    }
+
+    .contenedores {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .descripcion {
+        height: 12vh;
+    }
+
+    .precio {
+        font-size: 1.2rem;
+    }
+}
+
+/* Estilos para tamaños de pantalla medianos, como tablets */
+@media (max-width: 1024px) {
+    .contenedor {
+        grid-template-columns: repeat(2, 1fr);
+        /* Cambiar a 2 columnas en tablets */
+    }
+}
+
+.no-hover:hover {
+    text-decoration: none;
+    /* Otros estilos que desees quitar en hover */
 }

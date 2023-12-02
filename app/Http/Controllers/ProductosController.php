@@ -22,13 +22,7 @@ class ProductosController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $categorias = Categoria::all(); // Obtén todas las categorías
-        $subcategorias = Subcategorias::all(); // Obtén todas las subcategorías
-
-        return view('admin.crearProducto', compact('categorias', 'subcategorias'));
-    }
+   
 
     /**
      * Store a newly created resource in storage.

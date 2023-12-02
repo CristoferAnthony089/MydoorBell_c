@@ -4,27 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Categoria; 
+use App\Models\Subcategorias;
 
 class Productos extends Model
 {
-    public $timestamps = false;
     protected $fillable = [
-        'img_producto',
-        'nombre_producto',
+        'id_pro',
+        'imagen_pro',
+        'nombre_pro',
         'precio_pro',
-        'descripcion',
-        'stock',
-        'id_categoria',
-        'id_subcategoria',
+        'descripcion_pro',
+        'stock_pro',
+        'id_cat',
+        'id_subc'
     ];
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class, 'id_categoria');
+        return $this->belongsTo(Categoria::class, 'id_cat');
     }
 
     public function subcategoria()
     {
-        return $this->belongsTo(Subcategorias::class, 'id_subcategoria');
+        return $this->belongsTo(Subcategorias::class, 'id_subc');
     }
+    use HasFactory;
+    protected $primaryKey = 'id_pro';
+
+    public $timestamps = false;
+
     use HasFactory;
 }

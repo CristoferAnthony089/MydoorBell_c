@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class Carritos extends Model
 {
     protected $fillable = [
-        'id_cat',
-        'nombre_cat'
+        'cantidad_car',
+        'id_usu',
+        'id_pro'
     ];
 
-    protected $primaryKey = 'id_cat';
+    // Indica explícitamente que no hay clave primaria
+    protected $primaryKey = null;
 
     public $timestamps = false;
 
