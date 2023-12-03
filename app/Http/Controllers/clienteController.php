@@ -84,7 +84,7 @@ class ClienteController extends Controller
             ->select('*')
             ->join('categorias as c', 'c.id_cat', '=', 'p.id_cat')
             ->where('c.nombre_cat', '=', $categoryName)
-            ->where('stock_pro', '>=', 1)
+            ->where('stock_pro', '>', 1)
             ->get();
     }
 }
