@@ -10,7 +10,7 @@ class Contacto extends Model
     public $timestamps = false;
     protected $table ='contactanos';
     protected $primaryKey='id_con';
-    protected $fillable = [      
+    protected $fillable = [
      'correo_con',
      'tipoasunto_con',
      'descripcion_con',
