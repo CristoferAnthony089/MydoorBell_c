@@ -35,6 +35,9 @@
                             </form>
                         </a>
                     </li>
+                    
+                        <li><a href="{{ url('client/citas') }}">Citas</a></li>
+                     
                     <!--Ver inicio de sesion-->
 
                     

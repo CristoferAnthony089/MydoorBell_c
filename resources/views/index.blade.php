@@ -26,7 +26,7 @@
                     <li><a href="{{ url('client/ofice') }}">Oficinas</a></li>
                     <li><a href="{{ url('client/edifice') }}">Edificios</a></li>
                     <li><a href="{{ url('client/house') }}">Casas</a></li>
-                    <li><a href="{{ url('client/citas') }}">Citas</a></li>
+    
                     <li>
                         <a href="{{ route('shopping-cart.index') }}"><svg xmlns="http://www.w3.org/2000/svg"
                                 width="16" height="16" fill="currentColor" class="bi bi-cart4"

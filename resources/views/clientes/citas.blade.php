@@ -42,9 +42,9 @@
         
         <td>{{ date('Y-m-d H:i:s') }}</td>
         <td>{{ $cita->status_cit }}</td>
-        <td>{{ $cita->calle_dir }} {{ $cita->numeroext_dir }} {{ $cita->colonia_dir }} {{ $cita->codigopostal_dir }}</td>
+        <td>{{ $cita->calle_dir }} {{ $cita->numeroext_dir }} {{ $cita->colonia_dir }}  {{ $cita->numeroint_dir }}</td>
         <td>{{ $cita->fecha_cit }}</td>
-       
+        
       
       <td>
         <form action="{{ route('citas.destroy', $cita->id_cit) }}" method="POST">
@@ -67,12 +67,12 @@
   </div>
 
 <!-- Modal -->
-<div class="modal fade" id="addCitaModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
+<div class="modal fade" id="addCitaModal" tabindex="-1" role="dialog" style="z-index: 9999;">
+  <div class="modal-dialog" style="overflow-y: scroll; max-height: 95vh;">
+    <div class="modal-content">
       
         <div class="modal-header">
-            <h5 class="modal-title">Agregar Cita</h5>
+          <h5 class="modal-title" style="margin-bottom: 0; display: flex; align-items: center; justify-content: center;">Agregar Cita</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -112,8 +112,9 @@
               <div class="form-group">
                 <label for="cp">Código Postal</label>
                 <input type="text" class="form-control" id="cp" name="cp" required> 
+                
               </div>
-          
+          <input type="hidden" name="user_id" value="{{ $user_id }}">
             </div>
           
             <button type="submit" class="btn btn-primary">Agregar Cita</button>

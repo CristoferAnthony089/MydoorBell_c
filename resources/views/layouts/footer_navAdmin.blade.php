@@ -93,12 +93,16 @@
                                 <i class="fas fa-table"></i>
                                 Detalle de Compra
                             </a>
+                            <a class="nav-link" href="{{ url('admin/cita') }}">
+                                <i class="fas fa-table"></i>
+                                Citas
+                            </a>
                         </nav>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Sesión de:</div>
-                    {{ session('usuario.nombre') }}
+                    {{ Auth::user()->name }}
                 </div>
             </nav>
         </div>

@@ -88,6 +88,16 @@
                 </div>
             </div>
 
+            <div class="col-xl-3 col-md-6">
+                <div class="bg-primary card  text-white mb-4">
+                    <div class="card-body">Citas</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="{{ url('admin/cita') }}">Ver</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- ... (otros bloques de tarjetas) ... -->
         </div>
