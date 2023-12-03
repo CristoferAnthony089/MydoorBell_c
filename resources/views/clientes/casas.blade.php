@@ -46,13 +46,12 @@
                             <input type="submit" id="agregar_{{ $producto->id_pro }}" class="d-none">
                             </form>
                             <form action="{{ url('client/details/' . $producto->id_pro) }}" method="get">
-                                {{-- Cambiado el enlace --}}
                                 @csrf
                                 <input type="submit" id="detalles_{{ $producto->id_pro }}" class="d-none">
                             </form>
                             <div>
                                 <button class="btn btn-secondary">
-                                    <label for="detalles_{{ $producto->id_pro }}" class="d-flex h-100 w-100">
+                                    <label for="detalles_{{ $producto->id_pro }}" class="inline-flex h-100 w-100">
                                         <i class="fas fa-bars"></i>
                                         <p>Detalles</p>
                                     </label>

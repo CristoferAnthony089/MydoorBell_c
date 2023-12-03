@@ -33,7 +33,7 @@ class AdminAuth
                     'id_usu' => auth()->user()->id
                 ];
                 session(['usuario' => $usuario]);
-                return response()->view('clientes.indexCliente');
+                return response()->view('index');
             }
         }
     }

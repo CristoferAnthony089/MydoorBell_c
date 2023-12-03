@@ -98,7 +98,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Sesión de:</div>
-                    {{ session('usuario.nombre') }}
+                    {{ Auth::user()->name }}
                 </div>
             </nav>
         </div>
