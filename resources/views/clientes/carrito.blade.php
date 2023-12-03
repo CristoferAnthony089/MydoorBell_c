@@ -8,6 +8,20 @@
     @if (session('usuario.correo') && session('usuario.rol') === 'C')
         <h1 class="text-center mb-2">Carrito de {{ session('usuario.nombre') }}</h1>
         <section class="w-75 m-auto mb-5">
+            @if (Session::has('actualizado'))
+                <div class="alert alert-primary">
+                    {{ Session::get('actualizado') }}
+                </div>
+            @elseif (Session::has('eliminado'))
+                <div class="alert alert-danger">
+                    {{ Session::get('eliminado') }}
+                </div>
+            @elseif (Session::has('SinStock'))
+                <div class="alert alert-info">
+                    {{ Session::get('SinStock') }}
+                </div>
+            @endif
+
             @if ($carritos->count() > 0)
                 <div class="d-flex justify-content-end mb-3">
                     <button type="button" class="btn btn-danger borrarBtn" data-bs-toggle="modal"
@@ -49,7 +63,8 @@
                                                     <input class="cantidad w-50" name="cantidad_car" type="number"
                                                         value="{{ $carrito->total_cantidad_car }}" readonly>
                                                     <i class="iconos_carrito mas fas fa-plus"></i>
-                                                    <input type="submit" value="Modificar" class="btn btn-primary">
+                                                    <input type="submit" class="d-none"
+                                                        id="modificar_{{ $carrito->id_pro }}">
                                                 </form>
                                             </div>
                                         </label>
@@ -57,7 +72,14 @@
                                     <td>
                                         {{ $carrito->total }}
                                     </td>
-                                    <td>
+                                    <td class="d-flex">
+
+                                        <button type="button" class="btn btn-primary">
+                                            <label for="modificar_{{ $carrito->id_pro }}" class="w-100 h-100">
+                                                Modificar
+                                            </label>
+                                        </button>
+
                                         {{-- Botón Modal --}}
                                         <button type="button" class="btn btn-danger borrarBtn" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal">

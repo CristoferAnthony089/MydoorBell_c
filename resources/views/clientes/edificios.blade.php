@@ -5,71 +5,73 @@
 @endsection
 
 @section('contenido')
-    <main>
-        <h1 class="text-center">Edificios</h1>
-        <input type="text" id="busqueda" class="form-control w-75 m-auto mt-3" placeholder="Buscar productos...">
-        <h3 class="text-center mt-3" id="sin_resultados"></h3>
-        <section class="contenedor">
-            @if ($productos->count() > 0)
-                @foreach ($productos as $producto)
-                    <div class="contenedores">
-                        <section class="contenedor_productos_1">
-                            <figure>
-                                <img src="data:image/*;base64,{{ base64_encode($producto->imagen_pro) }}"
-                                    alt="Imagen Producto">
-                            </figure>
-                        </section>
-                        <section class="contenedor_productos_2">
-                            <div>
-                                <h2 class="titulo_producto">
-                                    {{ $producto->nombre_pro }}
-                                </h2>
-
-                                <strong class="precio">
-                                    ${{ $producto->precio_pro }}
-                                </strong>
-                                <form class="agregarCarritoForm">
-                                    @csrf
-                                    <label class="mb-3">Cantidad
-                                        <div>
-                                            <i class="iconos_carrito menos fas fa-minus"></i>
-                                            <input class="cantidad" name="cantidad_car" type="number" value="1"
-                                                min="1" readonly>
-                                            <i class="iconos_carrito mas fas fa-plus"></i>
-                                        </div>
-                                    </label>
-                                    <input type="hidden" name="id_pro" value="{{ $producto->id_pro }}">
-                                    <input type="hidden" name="id_usu" value="1">
-                                    <input type="submit" id="agregar_{{ $producto->id_pro }}" class="d-none">
-                                </form>
-                                <form action="{{ url('client/details/' . $producto->id_pro) }}" method="get">
-                                    {{-- Cambiado el enlace --}}
-                                    @csrf
-                                    <input type="submit" id="detalles_{{ $producto->id_pro }}" class="d-none">
-                                </form>
+    <h1 class="text-center mt-5">Edificios</h1>
+    <input type="text" id="busqueda" class="form-control w-75 m-auto mt-3" placeholder="Buscar productos...">
+    <h3 class="text-center mt-3" id="sin_resultados"></h3>
+    <section class="contenedor">
+        @if ($productos->count() > 0)
+            @foreach ($productos as $producto)
+                <div class="contenedores">
+                    <section class="contenedor_productos_1">
+                        <figure>
+                            <img src="data:image/*;base64,{{ base64_encode($producto->imagen_pro) }}" alt="Imagen Producto">
+                        </figure>
+                    </section>
+                    <section class="contenedor_productos_2">
+                        <div>
+                            <h2 class="titulo_producto">
+                                {{ $producto->nombre_pro }}
+                            </h2>
+                            <p class="descripcion">
+                                {{ $producto->descripcion_pro }}
+                            </p>
+                            <strong class="precio">
+                                ${{ $producto->precio_pro }}
+                            </strong>
+                            @if (session('usuario.correo'))
+                                <form class="agregarCarritoForm" action="{{ route('shopping-cart.store') }}" method="POST">
+                                @else
+                                    <form action="{{ route('login') }}">
+                            @endif
+                            @csrf
+                            <label class="mb-3">Cantidad
                                 <div>
-                                    <button class="btn btn-secondary">
-                                        <label for="detalles_{{ $producto->id_pro }}" class="d-flex h-100 w-100">
-                                            <i class="fas fa-bars"></i>
-                                            <p>Detalles</p>
-                                        </label>
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <label for="agregar_{{ $producto->id_pro }}" class="d-flex">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            Agregar
-                                        </label>
-                                    </button>
+                                    <i class="iconos_carrito menos fas fa-minus"></i>
+                                    <input class="cantidad" name="cantidad_car" type="number" value="1" min="1"
+                                        readonly>
+                                    <i class="iconos_carrito mas fas fa-plus"></i>
                                 </div>
+                            </label>
+                            <input type="hidden" name="id_pro" value="{{ $producto->id_pro }}">
+                            <input type="submit" id="agregar_{{ $producto->id_pro }}" class="d-none">
+                            </form>
+                            <form action="{{ url('client/details/' . $producto->id_pro) }}" method="get">
+                                {{-- Cambiado el enlace --}}
+                                @csrf
+                                <input type="submit" id="detalles_{{ $producto->id_pro }}" class="d-none">
+                            </form>
+                            <div>
+                                <button class="btn btn-secondary">
+                                    <label for="detalles_{{ $producto->id_pro }}" class="inline-flex h-100 w-100">
+                                        <i class="fas fa-bars"></i>
+                                        <p>Detalles</p>
+                                    </label>
+                                </button>
+                                <button class="btn btn-primary">
+                                    <label for="agregar_{{ $producto->id_pro }}" class="d-flex">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        Agregar
+                                    </label>
+                                </button>
                             </div>
-                        </section>
-                    </div>
-                @endforeach
-        </section>
-    @else
-        <h1 class="text-center mt-3">Sin Productos</h1>
-        @endif
-    </main>
+                        </div>
+                    </section>
+                </div>
+            @endforeach
+    </section>
+@else
+    <h1 class="text-center mt-3">Sin Productos</h1>
+    @endif
     <script src="{{ asset('js/carrito.js') }}"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script>
@@ -83,11 +85,7 @@
                     data: formData,
                     dataType: 'json',
                     success: function(respuesta) {
-                        if (respuesta) {
-                            alert('Se modificó.');
-                        } else {
-                            alert('Se agregó.');
-                        }
+                        console.log(respuesta);
                     },
                 });
             });
@@ -107,10 +105,10 @@
                 var nombreProducto = producto.querySelector('.titulo_producto').textContent.toLowerCase();
 
                 if (nombreProducto.includes(busqueda)) {
-                    producto.style.visibility = 'visible';
+                    producto.style.display = 'block';
                     mensaje.textContent = '';
                 } else {
-                    producto.style.visibility = 'hidden';
+                    producto.style.display = 'none';
                     mensaje.textContent = 'Sin Resultados';
                 }
             });
