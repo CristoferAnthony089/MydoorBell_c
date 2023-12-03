@@ -1,6 +1,3 @@
-@if (session('usuario.correo') && session('usuario.rol') == 'A')
-    {{ view('admin.index') }}
-@endif
 <!--mensaje-->
 <!DOCTYPE html>
 <html lang="en">
