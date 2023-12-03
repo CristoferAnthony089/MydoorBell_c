@@ -15,14 +15,26 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->check()){
-            if(auth()->user()->rol_usu=='A'){
+        if (auth()->check()) {
+            if (auth()->user()->rol_usu == 'A') {
+                $usuario = [
+                    'correo' => auth()->user()->email,
+                    'rol' => auth()->user()->rol_usu,
+                    'nombre' => auth()->user()->name,
+                    'id_usu' => auth()->user()->id
+                ];
+                session(['usuario' => $usuario]);
                 return response()->view('admin.index');
-            }else{
-                return response()->view('clientes.indexCliente');
+            } else {
+                $usuario = [
+                    'correo' => auth()->user()->email,
+                    'rol' => auth()->user()->rol_usu,
+                    'nombre' => auth()->user()->name,
+                    'id_usu' => auth()->user()->id
+                ];
+                session(['usuario' => $usuario]);
+                return redirect('/');
             }
-             
         }
-       
     }
 }

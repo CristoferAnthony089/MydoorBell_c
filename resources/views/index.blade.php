@@ -1,3 +1,6 @@
+@if (session('usuario.correo') && session('usuario.rol') == 'A')
+    {{ view('admin.index') }}
+@endif
 <!--mensaje-->
 <!DOCTYPE html>
 <html lang="en">
@@ -27,20 +30,43 @@
                     <li><a href="{{ url('client/edifice') }}">Edificios</a></li>
                     <li><a href="{{ url('client/house') }}">Casas</a></li>
                     <li><a href="{{ url('client/citas') }}">Citas</a></li>
-                    <li><a href="{{ route('shopping-cart.index') }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-                    </svg>  Carrito</a></li>
-                    <li><a href="{{ route('login') }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
-                    </svg>  Iniciar Sesión</a></li>
+                    <li>
+                        <a href="{{ route('shopping-cart.index') }}"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16" fill="currentColor" class="bi bi-cart4"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                            </svg> Carrito
+                        </a>
+                    </li>
+                    @if (session('usuario.correo') && session('usuario.rol') === 'C')
+                        <li>
+                            <a class="dropdown-item text-decoration-none">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-dropdown-link :href="route('logout')"
+                                        onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                        {{ __('Cerrar sesion') }}
+                                    </x-dropdown-link>
+                                </form>
+                            </a>
+                        </li>
+                    @else
+                        <li>
+                            <a href="{{ route('login') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                </svg> Iniciar Sesión
+                            </a>
+                        </li>
+                    @endif
                     <li><a href="{{ url('client/contac') }}">Contactanos</a></li>
-                    <!--Ver inicio de sesion-->
-
-
-                    <!--Ver inicio de sesion-->
                 </ul>
             </nav>
-            <img class="hamburger" id="hamburger" src="{{ asset('img/hamburgesa.svg')}}" alt="">
+            <img class="hamburger" id="hamburger" src="{{ asset('img/hamburgesa.svg') }}" alt="">
         </div>
         <nav class="menu-navegacion">
             <ul>
@@ -49,7 +75,22 @@
                 <li><a href="{{ url('client/edifice') }}">Edificios</a></li>
                 <li><a href="{{ url('client/house') }}">Casas</a></li>
                 <li><a href="{{ route('shopping-cart.index') }}">Carrito</a></li>
-                <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
+                @if (session('usuario.correo') && session('usuario.rol') === 'C')
+                    <li>
+                        <a class="dropdown-item text-decoration-none">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                    {{ __('Cerrar Sesion') }}
+                                </x-dropdown-link>
+                            </form>
+                        </a>
+                    </li>
+                @else
+                    <li><a href="{{ route('login') }}">Iniciar Sesión</a></li>
+                @endif
                 <li><a href="{{ url('client/contac') }}">Contactanos</a></li>
             </ul>
         </nav>
@@ -57,7 +98,8 @@
             <h1 class="titulo">Seguridad al alcance de tus manos</h1>
             <br>
             <p class="copy">Bienvenido a nuestro mundo de innovación, comodidad y eficiencia:
-                My Dorbell, su destino definitivo para convertir su hogar en una casa inteligente de ensueño, donde la tecnología y
+                My Dorbell, su destino definitivo para convertir su hogar en una casa inteligente de ensueño, donde la
+                tecnología y
                 el estilo de vida se unen para ofrecerle soluciones inteligentes para cada rincón de su hogar.
             </p>
         </div>
@@ -66,36 +108,40 @@
         <h2 class="text-center mb-3">Productos</h2>
         <div class="container">
             <div class="row">
-                @for ($i = 1; $i <= 3; $i++) <div class="col-6 col-md-4 col-lg-3 m-auto mb-5">
-                    <div class="contenedorPro bg-body-secondary m-1 mb-4 h-100">
-                        <section class="m-auto">
-                            <div class="m-auto w-50">
-                                <img class="m-auto mt-2 w-100" src="{{ asset('img/camara.jpg') }}" alt="">
-                            </div>
-                            <div class="w-75 m-auto mb-2 texto text-justify">
-                                <h5 class="text-center mt-2 mb-3">$988</h5>
-                                <p>
-                                    Camara inteligente.
-                                    <br>
-                                    TP-Link Tapo C500, Cámara de Seguridad Wi-Fi para Exteriores, 360° FHD 1080P con Visión Nocturna, Audio Bidireccional. Cloud Video Recording, Funciona con Alexa.
-                                </p>
-                            </div>
-                            <div class="formularioDetAgg m-auto">
-                                <form class="m-auto d-flex pb-3" action="">
-                                    <button type="button" class="d-block m-auto btn btn-primary">
-                                        <a class="text-decoration-none text-black" href="{{ url('client/details') }}">Detalles
-                                            <i class="fas fa-bars"></i></a>
-                                    </button>
-                                    <button class="d-block m-auto btn btn-success">
-                                        <a class="text-decoration-none text-black" href="#">Agregar <i class="fas fa-shopping-cart"></i></a>
-                                    </button>
-                                </form>
-                            </div>
-                        </section>
+                @for ($i = 1; $i <= 3; $i++)
+                    <div class="col-6 col-md-4 col-lg-3 m-auto mb-5">
+                        <div class="contenedorPro bg-body-secondary m-1 mb-4 h-100">
+                            <section class="m-auto">
+                                <div class="m-auto w-50">
+                                    <img class="m-auto mt-2 w-100" src="{{ asset('img/camara.jpg') }}" alt="">
+                                </div>
+                                <div class="w-75 m-auto mb-2 texto text-justify">
+                                    <h5 class="text-center mt-2 mb-3">$988</h5>
+                                    <p>
+                                        Camara inteligente.
+                                        <br>
+                                        TP-Link Tapo C500, Cámara de Seguridad Wi-Fi para Exteriores, 360° FHD 1080P con
+                                        Visión Nocturna, Audio Bidireccional. Cloud Video Recording, Funciona con Alexa.
+                                    </p>
+                                </div>
+                                <div class="formularioDetAgg m-auto">
+                                    <form class="m-auto d-flex pb-3" action="">
+                                        <button type="button" class="d-block m-auto btn btn-primary">
+                                            <a class="text-decoration-none text-black"
+                                                href="{{ url('client/details') }}">Detalles
+                                                <i class="fas fa-bars"></i></a>
+                                        </button>
+                                        <button class="d-block m-auto btn btn-success">
+                                            <a class="text-decoration-none text-black" href="#">Agregar <i
+                                                    class="fas fa-shopping-cart"></i></a>
+                                        </button>
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
                     </div>
+                @endfor
             </div>
-            @endfor
-        </div>
         </div>
         </div>
         <section class="contenedor" id="servicio">
@@ -144,9 +190,12 @@
                     </div>
                     <div class="mobile-content">
                         <div class="horizontal-links">
-                            <a href="#"><img class="app1" src="{{ asset('img/huawei.jpg') }}" alt=""></a>
-                            <a href="#"><img class="app1" src="{{ asset('img/apple.jpg') }}" alt=""></a>
-                            <a href="#"><img class="app1" src="{{ asset('img/android.jpg') }}" alt=""></a>
+                            <a href="#"><img class="app1" src="{{ asset('img/huawei.jpg') }}"
+                                    alt=""></a>
+                            <a href="#"><img class="app1" src="{{ asset('img/apple.jpg') }}"
+                                    alt=""></a>
+                            <a href="#"><img class="app1" src="{{ asset('img/android.jpg') }}"
+                                    alt=""></a>
                         </div>
                     </div>
                 </section>

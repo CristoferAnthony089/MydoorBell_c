@@ -12,11 +12,6 @@ class adminController extends Controller
         return view('admin.index');
     }
 
-   
-
-
-
-
     function users(){
         $usuarios = DB::table('users')
         ->select('*')

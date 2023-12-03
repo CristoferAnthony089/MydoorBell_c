@@ -7,7 +7,6 @@ use App\Models\Productos;
 
 class ClienteController extends Controller
 {
-    private $id_usu = 1;
 
     public function ofice()
     {
@@ -74,7 +73,7 @@ class ClienteController extends Controller
                 'p.precio_pro as precio_pro'
             )
             ->join('productos as p', 'p.id_pro', '=', 'c.id_pro')
-            ->where('c.id_usu', '=', $this->id_usu)
+            ->where('c.id_usu', '=', session('usuario.id_usu'))
             ->groupBy('c.id_usu', 'c.id_pro', 'nombre_pro', 'descripcion_pro', 'precio_pro')
             ->get();
     }

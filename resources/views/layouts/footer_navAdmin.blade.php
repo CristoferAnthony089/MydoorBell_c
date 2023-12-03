@@ -1,3 +1,6 @@
+@if (session('usuario.correo') && session('usuario.rol') == 'C')
+    {{ view('index') }}
+@endif
 <!DOCTYPE html>
 <html lang="en">
 
@@ -98,7 +101,7 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Sesión de:</div>
-                    {{ Auth::user()->name }}
+                    {{ session('usuario.nombre') }}
                 </div>
             </nav>
         </div>

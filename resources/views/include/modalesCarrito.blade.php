@@ -37,7 +37,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('client/shopping-cart/delete/1') }}" method="POST">
+                    <form action="{{ url('client/shopping-cart/delete/' . session('usuario.id_usu')) }}" method="POST">
                         @csrf
                         <h3>Su Carrito?</h3>
                         @method('DELETE')

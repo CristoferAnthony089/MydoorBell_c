@@ -28,19 +28,22 @@
                             <strong class="precio">
                                 ${{ $producto->precio_pro }}
                             </strong>
-                            <form class="agregarCarritoForm" action="shopping-cart" method="POST">
-                                @csrf
-                                <label class="mb-3">Cantidad
-                                    <div>
-                                        <i class="iconos_carrito menos fas fa-minus"></i>
-                                        <input class="cantidad" name="cantidad_car" type="number" value="1"
-                                            min="1" readonly>
-                                        <i class="iconos_carrito mas fas fa-plus"></i>
-                                    </div>
-                                </label>
-                                <input type="hidden" name="id_pro" value="{{ $producto->id_pro }}">
-                                <input type="hidden" name="id_usu" value="1">
-                                <input type="submit" id="agregar_{{ $producto->id_pro }}" class="d-none">
+                            @if (session('usuario.correo'))
+                                <form class="agregarCarritoForm" action="{{ route('shopping-cart.store') }}" method="POST">
+                                @else
+                                    <form action="{{ route('login') }}">
+                            @endif
+                            @csrf
+                            <label class="mb-3">Cantidad
+                                <div>
+                                    <i class="iconos_carrito menos fas fa-minus"></i>
+                                    <input class="cantidad" name="cantidad_car" type="number" value="1" min="1"
+                                        readonly>
+                                    <i class="iconos_carrito mas fas fa-plus"></i>
+                                </div>
+                            </label>
+                            <input type="hidden" name="id_pro" value="{{ $producto->id_pro }}">
+                            <input type="submit" id="agregar_{{ $producto->id_pro }}" class="d-none">
                             </form>
                             <form action="{{ url('client/details/' . $producto->id_pro) }}" method="get">
                                 {{-- Cambiado el enlace --}}
