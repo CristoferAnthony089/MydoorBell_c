@@ -12,6 +12,11 @@ class CarritosController extends Controller
 {
     public function index()
     {
+
+        if (session('usuario.correo') && session('usuario.rol') === 'A') {
+            return redirect()->route('/admin');
+        }
+
         $carritos = DB::table('carritos as c')
             ->select(
                 'c.id_usu',
